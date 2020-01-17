@@ -1,0 +1,6 @@
+#!/bin/sh
+cPage=$(ps aux)
+gResult=$(echo "$cPage" | grep -n $1)
+echo "$gResult"
+rLineNo=$(echo "$gResult" | sed 's/:.*//')
+echo "$rLineNo"
