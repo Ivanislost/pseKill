@@ -1,6 +1,6 @@
 **PseKill**
 
-Simple bash script to terminate a process. Uses the original kill command with escalating priority. The script searched the ps Aux output for a process matching the input value. On more than one possible result will prompt to specify.
+Simple bash script to terminate a process. Uses the original kill command with escalating priority. The script searched the ps Aux output for a process matching the input value. On more than one possible result will ask to specify and exit. Also accepts pid values.
 
 **instructions**
 
