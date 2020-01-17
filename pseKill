@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 eSkill()
 {
 kill -15 $1 || kill -2 $1 || kill -1 $1 || kill -9 $pid
@@ -6,22 +6,23 @@ kill -15 $1 || kill -2 $1 || kill -1 $1 || kill -9 $pid
 
 re='^([[:digit:]]{4}|[[:digit:]]{5})$'
 
-if [[ $1 =~ ~re ]]; then
+if [[ $1 =~ $re ]]; then
   echo "running"
   eSkill $1
   exit
 fi
 
 cPage=$(ps aux)
-gResult=$(echo "$cPage" | grep -ni $1 | sed '/pseKill/d' | sed '/^.\{300\}./d' )
+gResult=$(echo "$cPage" | grep -ni $1 | sed '/pseKill/d' | sed '/^.\{150\}./d' )
+echo $gResult
 aLines=$(echo "$gResult" | wc -l)
 
 if [ $aLines -gt "1" ]; then
   echo "$rLineNo"
-  echo "\e[1m\e[31mMultiple Results found:\e[0m"
+  echo -e "\e[1m\e[31mMultiple Results found:\e[0m"
   echo "$gResult" | sed 's/.\{4\}\(.\{15\}\).\{63\}/\n\1/'
-  echo "\e[1m\e[32m\nPlease rerun command with specific name/location or PID\e[0m\n"
-elif [ !$aLines ]; then
+  echo -e "\e[1m\e[32m\nPlease rerun command with specific name/location or PID\e[0m\n"
+elif [[ $gResult = "" ]]; then
   echo "Nothing found"
 else
   echo "calling"
